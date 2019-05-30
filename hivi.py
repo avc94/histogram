@@ -23,11 +23,11 @@ class ColorDescriptor:
             # construct a mask for each corner of the image, subtracting
             corner_mask.fill(0)
             cv2.rectangle(corner_mask, (start_x, start_y), (end_x, end_y), 255, -1)
-            features.extend(self.histogram(image, corner_mask))
+            features.extend(self._create_histogram(image, corner_mask))
 
         return features
 
-    def histogram(self, image, mask):
+    def _create_histogram(self, image, mask):
         """Extract a 3D color histogram from the masked region of the
         image, using the supplied number of bins per channel; then
         normalize the histogram"""
@@ -53,12 +53,12 @@ class Searcher:
         # loop over indexes DB and find lesser distance between query and records
         # lesser dist means more 'similar' images
         for key in self._indexes:
-            d = self.chi2_distance(self._indexes[key], query_features)
+            d = self._chisq_distance(self._indexes[key], query_features)
             if d < result[1]:
                 result[0], result[1] = key, d
 
         return result
 
-    def chi2_distance(self, hist_a, hist_b, eps=1e-10):
+    def _chisq_distance(self, hist_a, hist_b, eps=1e-10):
         # compute the chi-squared distance
         return 0.5 * np.sum([((a - b) ** 2) / (a + b + eps) for (a, b) in zip(hist_a, hist_b)])
