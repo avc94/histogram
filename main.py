@@ -1,5 +1,4 @@
-from tarax.colordescriptor import ColorDescriptor
-from tarax.searcher import Searcher
+from hivi import ColorDescriptor, Searcher
 import cv2
 import numpy as np
 

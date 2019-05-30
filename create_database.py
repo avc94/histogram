@@ -1,4 +1,4 @@
-from tarax.colordescriptor import ColorDescriptor
+from hivi import ColorDescriptor
 import glob
 import cv2
 
