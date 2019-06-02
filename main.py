@@ -136,5 +136,5 @@ def performance_test():
 
 
 if __name__ == "__main__":
-    performance_test()
-    #main()
+    #performance_test()
+    main()

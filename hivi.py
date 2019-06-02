@@ -48,12 +48,12 @@ class Searcher:
             for row in reader:
                 self._indexes[row[0]] = [float(x) for x in row[1:]]
 
-    def search_best(self, query_features):
+    def search_best(self, query_histogram):
         result = ["Init value", float('inf')]
         # loop over indexes DB and find lesser distance between query and records
         # lesser dist means more 'similar' images
         for key in self._indexes:
-            d = self._chisq_distance(self._indexes[key], query_features)
+            d = self._chisq_distance(self._indexes[key], query_histogram)
             if d < result[1]:
                 result[0], result[1] = key, d
 
